@@ -21,7 +21,6 @@ const getUserRepos = async () => {
       data.map(function(repo) { 
         li = createNode('li');
         repoName = createNode('h4');
-        //repoDescription = createNode('p');
         repoLink = createNode('div');
         repoStars = createNode('span');
 
@@ -46,6 +45,7 @@ const getUserRepos = async () => {
       append(results, back);
       append(results, title);
       append(results, repoList);
+
 
     })
     .catch(error => {
