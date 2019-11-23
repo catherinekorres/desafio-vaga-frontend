@@ -1,5 +1,11 @@
-const getUserRepos = async () => {  
+function sortByStars(array, a, b) {
+  return array.sort((x, y) => (x.stargazers_count > y.stargazers_count) ? a : b);
+}
+
+const getUserRepos = async (order) => {  
   clearResults();
+
+  console.log(order);
 
   if (userData.username) {
     const url = `https://api.github.com/users/${userData.username}/repos`;
@@ -10,13 +16,20 @@ const getUserRepos = async () => {
     .then(data => {
       userData.repos = data;
 
-      data.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? -1 : 1);
+      order === 'desc' ? data = sortByStars(data, -1, 1) : data = sortByStars(data, 1, -1);
 
       title = createNode('h2');
       repoList = createNode('ul');
+      changeSort = createNode('div');
 
-      title.innerHTML = `Repositórios de ${userData.username}:`;
+      title.innerHTML = `Repositórios de ${userData.username}:`; 
+      changeSort.innerHTML = 'Inverter ordem';  
+      changeSort.addEventListener('click', () => {
+        order === 'desc' ? getUserRepos('asc') : getUserRepos('desc')
+      })
+
       addClass(repoList, "repo-list");
+      addClass(changeSort, "change-sort");
 
       data.map(function(repo) { 
         li = createNode('li');
@@ -44,6 +57,7 @@ const getUserRepos = async () => {
 
       append(results, back);
       append(results, title);
+      append(results, changeSort);
       append(results, repoList);
 
 

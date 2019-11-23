@@ -28,7 +28,7 @@ const getUserData = async () => {
       followers.innerHTML = `followers: ${data.followers}`;
       following.innerHTML = `following: ${data.following}`;
       repos.innerHTML = 'Ver repositórios';
-      repos.addEventListener("click", getUserRepos); 
+      repos.addEventListener("click", () => getUserRepos('desc')); 
 
       append(wrapper, avatar);
       append(wrapper, user);
