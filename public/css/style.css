@@ -30,12 +30,16 @@ input {
   max-width: 300px;
 }
 
-.get {
+.get, .change-sort {
   display: inline-block;
   background: #8080ff;
   color: #fff;
   padding: 7px 12px;
   cursor: pointer;
+}
+
+.change-sort {
+  align-self:flex-start;
 }
 
 #results {
